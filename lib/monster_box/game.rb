@@ -22,8 +22,10 @@ module MonsterBox
     def next_turn(player)
       if player == first_player && @state == :first_turn
         @state = :second_turn
+        second_player.crystal_bar.next_turn
       elsif player == second_player && @state == :second_turn
         @state = :first_turn
+        first_player.crystal_bar.next_turn
       else
         throw IllegalMove
       end
