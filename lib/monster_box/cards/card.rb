@@ -7,6 +7,10 @@ module MonsterBox
         @name = name
         @cost = cost
       end
+
+      def play
+        raise 'Not implemented'
+      end
     end
   end
 end

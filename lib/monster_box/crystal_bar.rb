@@ -31,6 +31,10 @@ module MonsterBox
       end
     end
 
+    def enough_crystals?(cost)
+      cost <= @unspent
+    end
+
     private
 
     def initialize(total)

@@ -8,6 +8,14 @@ module MonsterBox
         @attack = attack
         @health = health
       end
+
+      def play
+        summon
+      end
+
+      def summon
+        [self]
+      end
     end
   end
 end
