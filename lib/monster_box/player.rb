@@ -20,10 +20,10 @@ module MonsterBox
       @game.next_turn(self)
     end
 
-    def play_card(id)
-      if can_play?(id)
-        monster = @hand.play_card(id)
-        @board.summon(monster)
+    def play_card(card)
+      if can_play?(card)
+        @hand.play_card(card)
+        @board.summon(card)
       else
         raise MonsterBox::IllegalMove
       end
@@ -35,8 +35,8 @@ module MonsterBox
 
     private
 
-    def can_play?(id)
-      @crystal_bar.enough_crystals?(@hand.find(id).cost)
+    def can_play?(card)
+      @crystal_bar.enough_crystals?(card.cost)
     end
   end
 end

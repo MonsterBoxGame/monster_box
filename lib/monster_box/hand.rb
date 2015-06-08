@@ -13,10 +13,8 @@ module MonsterBox
       @cards = @cards.take(MAX_CARDS)
     end
 
-    def play_card(id)
-      card = find(id)
+    def play_card(card)
       @cards.delete(card)
-      card
     end
 
     def find(id)
