@@ -1,11 +1,14 @@
 module MonsterBox
   class Player
-    attr_reader :deck, :crystal_bar, :hand, :board
+    STARTING_HEALTH = 50
+
+    attr_reader :deck, :crystal_bar, :hand, :board, :health
 
     def initialize(deck)
       @deck = deck
       @board = MonsterBox::Board.new
       @crystal_bar = CrystalBar.initial
+      @health = STARTING_HEALTH
     end
 
     def game_started(game, hand)
@@ -25,6 +28,11 @@ module MonsterBox
         raise MonsterBox::IllegalMove
       end
     end
+
+    def being_attacked(attacker)
+      @health -= attacker.attack
+    end
+
     private
 
     def can_play?(id)

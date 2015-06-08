@@ -16,6 +16,14 @@ module MonsterBox
       def summon
         [self]
       end
+
+      def attack_target(target)
+        if attack > 0
+          target.being_attacked(self)
+        else
+          raise IllegalMove
+        end
+      end
     end
   end
 end
