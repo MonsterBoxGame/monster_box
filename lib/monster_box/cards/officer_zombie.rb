@@ -1,6 +1,6 @@
 module MonsterBox
   module Cards
-    class OfficerZombie < Minion
+    class OfficerZombie < Monster
       NAME = 'Officer Zombie'
       COST = 2
       ATTACK = 2

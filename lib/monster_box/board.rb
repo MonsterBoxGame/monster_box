@@ -1,13 +1,13 @@
 module MonsterBox
   class Board
-    attr_reader :minions
+    attr_reader :monsters
 
     def initialize
-      @minions = []
+      @monsters = []
     end
 
-    def summon(minion_card)
-      @minions.concat(minion_card.summon)
+    def summon(monster_card)
+      @monsters.concat(monster_card.summon)
     end
   end
 end

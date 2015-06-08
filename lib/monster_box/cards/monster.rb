@@ -1,6 +1,6 @@
 module MonsterBox
   module Cards
-    class Minion < Card
+    class Monster < Card
       attr_reader :attack, :health
 
       def initialize(name, cost, attack, health)

@@ -19,8 +19,8 @@ module MonsterBox
 
     def play_card(id)
       if can_play?(id)
-        minion = @hand.play_card(id)
-        @board.summon(minion)
+        monster = @hand.play_card(id)
+        @board.summon(monster)
       else
         raise MonsterBox::IllegalMove
       end
