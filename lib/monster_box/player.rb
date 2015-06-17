@@ -1,13 +1,16 @@
 module MonsterBox
   class Player
+    include Observable
+
     STARTING_HEALTH = 50
 
-    attr_reader :deck, :crystal_bar, :hand, :board, :health
+    attr_reader :is_turn, :deck, :crystal_bar, :hand, :board, :health
 
-    def initialize(deck)
+    def initialize(my_turn, deck, crystal_bar)
+      @is_turn = my_turn
       @deck = deck
       @board = MonsterBox::Board.new
-      @crystal_bar = CrystalBar.initial
+      @crystal_bar = crystal_bar
       @health = STARTING_HEALTH
     end
 
@@ -17,7 +20,12 @@ module MonsterBox
     end
 
     def pass_turn
-      @game.next_turn(self)
+      if @is_turn
+        changed
+        notify_observers(:turn_passed)
+      else
+        throw IllegalMove
+      end
     end
 
     def play_card(card)
@@ -31,6 +39,20 @@ module MonsterBox
 
     def being_attacked(attacker)
       @health -= attacker.attack
+    end
+
+    def update(event)
+      if event == Events::TURN_PASSED
+        if @is_turn
+          @is_turn = false
+        else
+          @is_turn = true
+          @crystal_bar.next_turn
+          new_card = @deck.draw
+          @hand.insert(new_card)
+          @board.next_turn
+        end
+      end
     end
 
     private

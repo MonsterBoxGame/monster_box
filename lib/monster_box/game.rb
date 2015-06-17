@@ -10,7 +10,7 @@ module MonsterBox
     end
 
     def start
-      @state = :first_turn
+      @state = :running
       first_player.deck.shuffle
       first_hand = Hand.new(first_player.deck.draw(3))
       first_player.game_started(self, first_hand)
@@ -21,24 +21,6 @@ module MonsterBox
 
     def end
       @state = :ended
-    end
-
-    def next_turn(player)
-      if player == first_player && @state == :first_turn
-        @state = :second_turn
-        next_turn_for_player(second_player)
-      elsif player == second_player && @state == :second_turn
-        @state = :first_turn
-        next_turn_for_player(first_player)
-      else
-        throw IllegalMove
-      end
-    end
-
-    def next_turn_for_player(player)
-      player.crystal_bar.next_turn
-      new_card = player.deck.draw
-      player.hand.insert(new_card)
     end
   end
 end
