@@ -43,6 +43,10 @@ module MonsterBox
       def next_turn
         @can_attack = true
       end
+
+      def alive?
+        @health > 0
+      end
     end
   end
 end

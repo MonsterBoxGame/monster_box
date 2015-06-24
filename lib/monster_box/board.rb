@@ -4,6 +4,7 @@ module MonsterBox
 
     def initialize
       @monsters = []
+      @dead = []
     end
 
     def summon(monster_card)
@@ -12,6 +13,33 @@ module MonsterBox
 
     def next_turn
       @monsters.each { |monster| monster.next_turn }
+    end
+
+    def attack_target(other_board, attacker, target)
+      if @monsters.include?(attacker)
+        other_board.being_attacked(attacker, target)
+        remove_dead_mosters
+      else
+        raise IllegalMove.new('No such attacker')
+      end
+    end
+
+    def being_attacked(attacker, target)
+      if @monsters.include?(target)
+        attacker.attack_target(target)
+        remove_dead_mosters
+      else
+        raise IllegalMove.new('No such target')
+      end
+    end
+
+    def remove_dead_mosters
+      @monsters.dup.each do |monster|
+        unless monster.alive?
+          @monsters.delete(monster)
+          @dead << monster
+        end
+      end
     end
   end
 end
