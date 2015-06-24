@@ -15,7 +15,7 @@ module MonsterBox
       @monsters.each { |monster| monster.next_turn }
     end
 
-    def attack_target(other_board, attacker, target)
+    def attack_monster(other_board, attacker, target)
       if @monsters.include?(attacker)
         other_board.being_attacked(attacker, target)
         remove_dead_mosters

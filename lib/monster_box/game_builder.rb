@@ -20,7 +20,10 @@ module MonsterBox
       first_player.add_observer(first_player)
       second_player.add_observer(first_player)
       second_player.add_observer(second_player)
-      Game.new(first_player, second_player, nil)
+      game = Game.new(first_player, second_player, nil)
+      first_player.add_observer(game)
+      second_player.add_observer(game)
+      game
     end
   end
 end

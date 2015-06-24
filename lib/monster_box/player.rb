@@ -22,7 +22,7 @@ module MonsterBox
     def pass_turn
       if @is_turn
         changed
-        notify_observers(:turn_passed)
+        notify_observers(Events::TURN_PASSED)
       else
         throw IllegalMove
       end
@@ -37,8 +37,28 @@ module MonsterBox
       end
     end
 
+    def attack_target(opponent, attacker, target)
+      opponent.under_attack(@board, attacker, target)
+    end
+
+    def under_attack(opponent_board, attacker, target)
+      if target == self
+        being_attacked(attacker)
+      else
+        opponent_board.attack_monster(@board, attacker, target)
+      end
+    end
+
     def being_attacked(attacker)
       @health -= attacker.attack
+      unless alive?
+        changed
+        notify_observers(Events::PLAYER_DIED)
+      end
+    end
+
+    def alive?
+      @health > 0
     end
 
     def update(event)

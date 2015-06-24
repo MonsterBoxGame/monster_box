@@ -19,8 +19,14 @@ module MonsterBox
       second_player.game_started(self, second_hand)
     end
 
-    def end
+    def finish
       @state = :ended
+    end
+
+    def update(event)
+      if event == Events::PLAYER_DIED
+        finish
+      end
     end
   end
 end
