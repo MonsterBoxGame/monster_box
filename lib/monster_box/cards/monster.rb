@@ -31,6 +31,15 @@ module MonsterBox
         end
       end
 
+      def being_attacked(attacker)
+        take_damage(attacker.attack)
+        attacker.take_damage(@attack)
+      end
+
+      def take_damage(amount)
+        @health -= amount
+      end
+
       def next_turn
         @can_attack = true
       end
