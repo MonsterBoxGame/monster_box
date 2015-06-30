@@ -5,7 +5,7 @@ module MonsterBox
         MonsterBox::Cards::OfficerZombie.new
       end
       second_player_cards = (1..30).map do
-        MonsterBox::Cards::OfficerZombie.new
+        MonsterBox::Cards::CircusClown.new
       end
       first_crystal_bar = CrystalBar.initial
       second_crystal_bar = CrystalBar.initial

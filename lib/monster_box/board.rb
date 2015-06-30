@@ -41,5 +41,19 @@ module MonsterBox
         end
       end
     end
+
+    def has_guards?
+      guards.size > 0
+    end
+
+    def has_guard?(monster)
+      guards.include?(monster)
+    end
+
+    def guards
+      @monsters.select do |monster|
+        monster.has_guard
+      end
+    end
   end
 end

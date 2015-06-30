@@ -24,7 +24,7 @@ module MonsterBox
         changed
         notify_observers(Events::TURN_PASSED)
       else
-        throw IllegalMove
+        throw MonsterBox::IllegalMove
       end
     end
 
@@ -42,10 +42,18 @@ module MonsterBox
     end
 
     def under_attack(opponent_board, attacker, target)
-      if target == self
-        being_attacked(attacker)
+      if @board.has_guards?
+        if @board.has_guard?(target)
+          opponent_board.attack_monster(@board, attacker, target)
+        else
+          raise MonsterBox::IllegalMove.new(MonsterBox::IllegalMove::GUARD_ERROR)
+        end
       else
-        opponent_board.attack_monster(@board, attacker, target)
+        if target == self
+          being_attacked(attacker)
+        else
+          opponent_board.attack_monster(@board, attacker, target)
+        end
       end
     end
 

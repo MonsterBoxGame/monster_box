@@ -1,12 +1,13 @@
 module MonsterBox
   module Cards
     class Monster < Card
-      attr_reader :attack, :health, :can_attack
+      attr_reader :attack, :health, :can_attack, :has_guard
 
-      def initialize(name, cost, attack, health)
+      def initialize(name, cost, attack, health, has_guard = false)
         super(name, cost)
         @attack = attack
         @health = health
+        @has_guard = has_guard
         @can_attack = false
       end
 
