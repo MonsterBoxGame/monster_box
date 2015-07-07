@@ -5,6 +5,7 @@ module MonsterBox
     def initialize(first_player, second_player, board)
       @first_player = first_player
       @second_player = second_player
+      @players = [first_player, second_player]
       @board = board
       @state = :new
     end
@@ -23,10 +24,23 @@ module MonsterBox
       @state = :ended
     end
 
+    def pass_turn(player_id)
+      player = find_player(player_id)
+      player.pass_turn
+    end
+
     def update(event)
       if event == Events::PLAYER_DIED
         finish
       end
+    end
+
+    private
+
+    def find_player(player_id)
+      player = @players[player_id]
+      raise MonsterBox::IllegalMove unless player
+      player
     end
   end
 end
