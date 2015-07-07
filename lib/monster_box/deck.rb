@@ -1,13 +1,16 @@
 module MonsterBox
   class Deck
-    attr_reader :cards
+    attr_reader :cards, :overdraw
 
     def initialize(cards)
       @cards = cards
+      @overdraw = 0
     end
 
     def draw(number = 1)
-      @cards.shift(number)
+      cards = @cards.shift(number)
+      @overdraw += 1 if cards.empty?
+      cards
     end
 
     def insert(new_cards)

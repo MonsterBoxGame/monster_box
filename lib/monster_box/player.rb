@@ -38,10 +38,10 @@ module MonsterBox
     end
 
     def attack_target(opponent, attacker, target)
-      opponent.under_attack(@board, attacker, target)
+      opponent.being_attacked(@board, attacker, target)
     end
 
-    def under_attack(opponent_board, attacker, target)
+    def being_attacked(opponent_board, attacker, target)
       if @board.has_guards?
         if @board.has_guard?(target)
           opponent_board.attack_monster(@board, attacker, target)
@@ -50,18 +50,10 @@ module MonsterBox
         end
       else
         if target == self
-          being_attacked(attacker)
+          take_damage(attacker)
         else
           opponent_board.attack_monster(@board, attacker, target)
         end
-      end
-    end
-
-    def being_attacked(attacker)
-      @health -= attacker.attack
-      unless alive?
-        changed
-        notify_observers(Events::PLAYER_DIED)
       end
     end
 
@@ -76,9 +68,13 @@ module MonsterBox
         else
           @is_turn = true
           @crystal_bar.next_turn
-          new_card = @deck.draw
-          @hand.insert(new_card)
-          @board.next_turn
+          new_cards = @deck.draw
+          unless new_cards.empty?
+            @hand.insert(new_cards)
+            @board.next_turn
+          else
+            drain
+          end
         end
       end
     end
@@ -87,6 +83,18 @@ module MonsterBox
 
     def can_play?(card)
       @crystal_bar.enough_crystals?(card.cost)
+    end
+
+    def take_damage(amount)
+      @health -= amount
+      unless alive?
+        changed
+        notify_observers(Events::PLAYER_DIED)
+      end
+    end
+
+    def drain
+      take_damage(deck.overdraw)
     end
   end
 end
