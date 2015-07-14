@@ -50,7 +50,7 @@ module MonsterBox
         end
       else
         if target == self
-          take_damage(attacker)
+          take_damage(attacker.attack)
         else
           opponent_board.attack_monster(@board, attacker, target)
         end
