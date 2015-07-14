@@ -1,14 +1,15 @@
 module MonsterBox
   module Cards
     module Circus
-      class CircusClown < Base
-        NAME = 'Circus Clown'
+      class BasicClown < Base
+        NAME = 'Basic Clown'
         COST = 1
         ATTACK = 1
         HEALTH = 3
+        HAS_GUARD = true
 
         def initialize
-          super(NAME, COST, ATTACK, HEALTH, true)
+          super(NAME, COST, ATTACK, HEALTH, HAS_GUARD)
         end
       end
     end
