@@ -2,10 +2,10 @@ module MonsterBox
   class GameBuilder
     def self.create_game
       first_player_cards = (1..30).map do
-        MonsterBox::Cards::OfficerZombie.new
+        MonsterBox::Cards::Zombies::OfficerZombie.new
       end
       second_player_cards = (1..30).map do
-        MonsterBox::Cards::CircusClown.new
+        MonsterBox::Cards::Circus::CircusClown.new
       end
       first_crystal_bar = CrystalBar.initial
       second_crystal_bar = CrystalBar.initial
