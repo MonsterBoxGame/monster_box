@@ -6,11 +6,12 @@ module MonsterBox
 
         COST = 4
         ATTACK = 2
+        TEXT = 'When played, summon a 4/3 Lion'
         HEALTH = 2
         HAS_GUARD = false
 
         def initialize
-          super(NAME, COST, ATTACK, HEALTH, HAS_GUARD)
+          super(NAME, COST, TEXT, ATTACK, HEALTH, HAS_GUARD)
         end
 
         def summon

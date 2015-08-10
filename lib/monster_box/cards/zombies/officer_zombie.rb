@@ -4,11 +4,12 @@ module MonsterBox
       class OfficerZombie < Base
         NAME = 'Officer Zombie'
         COST = 2
+        TEXT = ''
         ATTACK = 2
         HEALTH = 3
 
         def initialize
-          super(NAME, COST, ATTACK, HEALTH)
+          super(NAME, COST, TEXT, ATTACK, HEALTH)
         end
       end
     end

@@ -3,8 +3,8 @@ module MonsterBox
     class Monster < Card
       attr_reader :attack, :health, :can_attack, :has_guard
 
-      def initialize(name, cost, attack, health, has_guard = false)
-        super(name, cost)
+      def initialize(name, cost, text, attack, health, has_guard = false)
+        super(name, cost, text)
         @attack = attack
         @health = health
         @has_guard = has_guard

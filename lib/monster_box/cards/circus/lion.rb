@@ -3,14 +3,13 @@ module MonsterBox
     module Circus
       class Lion < Base
         NAME = 'Lion'
-
         COST = 3
+        TEXT = ''
         ATTACK = 4
         HEALTH = 3
-        HAS_GUARD = false
 
         def initialize
-          super(NAME, COST, ATTACK, HEALTH, HAS_GUARD)
+          super(NAME, COST, TEXT, ATTACK, HEALTH)
         end
       end
     end
