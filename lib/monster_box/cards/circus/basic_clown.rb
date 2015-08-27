@@ -6,7 +6,6 @@ module MonsterBox
                                 .health(3)
                                 .attack(1)
                                 .has_guard
-                                .text('GUARD')
                                 .build
     end
   end

@@ -2,6 +2,7 @@ module MonsterBox
   module Cards
     module Builders
       class Base
+        GUARD_TEXT = 'GUARD'
         DEFAULT_COST = 0
         DEFAULT_TEXT = ''
         DEFAULT_ATTACK = 0
@@ -61,11 +62,21 @@ module MonsterBox
           end
           card_class.const_set('NAME', @name)
           card_class.const_set('COST', @cost)
-          card_class.const_set('TEXT', @text)
+          card_class.const_set('TEXT', build_text)
           card_class.const_set('ATTACK', @attack)
           card_class.const_set('HEALTH', @health)
           card_class.const_set('HAS_GUARD', @has_guard)
           card_class
+        end
+
+        private
+
+        def build_text
+          if @has_guard
+            "#{GUARD_TEXT}\n#{@text}"
+          else
+            @text
+          end
         end
       end
     end
