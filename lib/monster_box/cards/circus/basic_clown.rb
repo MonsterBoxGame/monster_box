@@ -1,18 +1,13 @@
 module MonsterBox
   module Cards
     module Circus
-      class BasicClown < Base
-        NAME = 'Basic Clown'
-        COST = 1
-        TEXT = 'GUARD'
-        ATTACK = 1
-        HEALTH = 3
-        HAS_GUARD = true
-
-        def initialize
-          super(NAME, COST, TEXT, ATTACK, HEALTH, HAS_GUARD)
-        end
-      end
+      BasicClown = Builders::Circus.new('Basic clown')
+                                .cost(1)
+                                .health(3)
+                                .attack(1)
+                                .has_guard
+                                .text('GUARD')
+                                .build
     end
   end
 end

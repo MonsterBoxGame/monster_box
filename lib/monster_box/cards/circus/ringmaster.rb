@@ -1,19 +1,12 @@
 module MonsterBox
   module Cards
     module Circus
-      class Ringmaster < Base
-        NAME = 'Ringmaster'
-
-        COST = 4
-        ATTACK = 2
-        TEXT = 'When played, summon a 4/3 Lion'
-        HEALTH = 2
-        HAS_GUARD = false
-
-        def initialize
-          super(NAME, COST, TEXT, ATTACK, HEALTH, HAS_GUARD)
-        end
-
+      Ringmaster = Builders::Circus.new('Ringmaster')
+                                .cost(4)
+                                .health(2)
+                                .attack(2)
+                                .text('When played, summon a 4/3 Lion')
+                                .build do
         def summon
           [self, Lion.new]
         end
