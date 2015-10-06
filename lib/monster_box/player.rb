@@ -3,6 +3,7 @@ module MonsterBox
     include Observable
 
     STARTING_HEALTH = 50
+    ABILITY_COST = 3
 
     attr_reader :is_turn, :deck, :crystal_bar, :hand, :board, :health
 
@@ -61,20 +62,26 @@ module MonsterBox
       @health > 0
     end
 
+    def use_ability
+      if can_ability?
+        @crystal_bar.spend(ABILITY_COST)
+        @used_villain_ability = true
+        draw_card
+      else
+        raise MonsterBox::IllegalMove
+      end
+    end
+
     def update(event)
       if event == Events::Game::TURN_PASSED
         if @is_turn
           @is_turn = false
         else
+          draw_card
           @is_turn = true
+          @used_villain_ability = false
           @crystal_bar.next_turn
-          new_cards = @deck.draw
-          unless new_cards.empty?
-            @hand.insert(new_cards)
-            @board.next_turn
-          else
-            drain
-          end
+          @board.next_turn
         end
       end
     end
@@ -85,11 +92,25 @@ module MonsterBox
       @crystal_bar.enough_crystals?(card.cost)
     end
 
+    def can_ability?
+      !@used_villain_ability &&
+        @crystal_bar.enough_crystals?(ABILITY_COST)
+    end
+
     def take_damage(amount)
       @health -= amount
       unless alive?
         changed
         notify_observers(Events::Game::PLAYER_DIED)
+      end
+    end
+
+    def draw_card
+      new_cards = @deck.draw
+      unless new_cards.empty?
+        @hand.insert(new_cards)
+      else
+        drain
       end
     end
 
