@@ -31,6 +31,7 @@ module MonsterBox
 
     def play_card(card)
       if can_play?(card)
+        @crystal_bar.spend(card.cost)
         @hand.play_card(card)
         @board.summon(card)
       else
