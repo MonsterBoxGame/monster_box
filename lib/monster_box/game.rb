@@ -30,7 +30,7 @@ module MonsterBox
     end
 
     def update(event)
-      if event == Events::PLAYER_DIED
+      if event == Events::Game::PLAYER_DIED
         finish
       end
     end

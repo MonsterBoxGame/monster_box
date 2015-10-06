@@ -22,7 +22,7 @@ module MonsterBox
     def pass_turn
       if @is_turn
         changed
-        notify_observers(Events::TURN_PASSED)
+        notify_observers(Events::Game::TURN_PASSED)
       else
         throw MonsterBox::IllegalMove
       end
@@ -62,7 +62,7 @@ module MonsterBox
     end
 
     def update(event)
-      if event == Events::TURN_PASSED
+      if event == Events::Game::TURN_PASSED
         if @is_turn
           @is_turn = false
         else
@@ -89,7 +89,7 @@ module MonsterBox
       @health -= amount
       unless alive?
         changed
-        notify_observers(Events::PLAYER_DIED)
+        notify_observers(Events::Game::PLAYER_DIED)
       end
     end
 

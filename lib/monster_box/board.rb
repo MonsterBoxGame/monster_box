@@ -8,7 +8,7 @@ module MonsterBox
     end
 
     def summon(monster_card)
-      @monsters.concat(monster_card.summon)
+      summon_monsters(monster_card.summon)
     end
 
     def next_turn
@@ -36,6 +36,7 @@ module MonsterBox
     def remove_dead_mosters
       @monsters.dup.each do |monster|
         unless monster.alive?
+          monster.died
           @monsters.delete(monster)
           @dead << monster
         end
@@ -54,6 +55,19 @@ module MonsterBox
       @monsters.select do |monster|
         monster.has_guard
       end
+    end
+
+    def update(event, *args)
+      if event == Events::Monsters::SUMMON_MONSTERS
+        summon_monsters(args[0])
+      end
+    end
+
+    private
+
+    def summon_monsters(monsters)
+      monsters.each { |monster| monster.add_observer(self) }
+      @monsters.concat(monsters)
     end
   end
 end

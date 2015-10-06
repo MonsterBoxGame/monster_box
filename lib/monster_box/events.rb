@@ -1,6 +1,11 @@
 module MonsterBox
   module Events
-    TURN_PASSED = :turn_passed
-    PLAYER_DIED = :player_died
+    module Game
+      TURN_PASSED = :turn_passed
+      PLAYER_DIED = :player_died
+    end
+    module Monsters
+      SUMMON_MONSTERS = :summon_monsters
+    end
   end
 end

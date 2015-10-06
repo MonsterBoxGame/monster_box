@@ -1,6 +1,8 @@
 module MonsterBox
   module Cards
     class Monster < Card
+      include Observable
+
       attr_reader :attack, :health, :can_attack, :has_guard
 
       def initialize(name, cost, text, attack, health, has_guard = false)
@@ -47,6 +49,9 @@ module MonsterBox
 
       def alive?
         @health > 0
+      end
+
+      def died
       end
     end
   end
