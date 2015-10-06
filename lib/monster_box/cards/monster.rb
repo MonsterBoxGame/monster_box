@@ -5,11 +5,18 @@ module MonsterBox
 
       attr_reader :attack, :health, :can_attack, :has_guard
 
-      def initialize(name, cost, text, attack, health, has_guard = false)
+      def initialize(name,
+                     cost,
+                     text,
+                     attack,
+                     health,
+                     has_guard = false,
+                     has_dying_wish = false)
         super(name, cost, text)
         @attack = attack
         @health = health
         @has_guard = has_guard
+        @has_dying_wish = has_dying_wish
         @can_attack = false
       end
 

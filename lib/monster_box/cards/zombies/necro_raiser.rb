@@ -7,7 +7,8 @@ module MonsterBox
          'Necro-raiser').cost(6)
                         .health(6)
                         .attack(3)
-                        .text('Dying wish: Summon 3 1/1 Lil Zombies')
+                        .has_dying_wish
+                        .text('Summon 3 1/1 Lil Zombies')
                         .build do
 
         def died
