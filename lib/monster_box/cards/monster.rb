@@ -3,7 +3,7 @@ module MonsterBox
     class Monster < Card
       include Observable
 
-      attr_reader :attack, :health, :can_attack, :has_guard
+      attr_reader :attack, :health, :can_attack, :has_guard, :has_burst
 
       def initialize(name,
                      cost,
@@ -11,13 +11,15 @@ module MonsterBox
                      attack,
                      health,
                      has_guard = false,
-                     has_dying_wish = false)
+                     has_dying_wish = false,
+                     has_burst = false)
         super(name, cost, text)
         @attack = attack
         @health = health
         @has_guard = has_guard
         @has_dying_wish = has_dying_wish
-        @can_attack = false
+        @has_burst = has_burst
+        @can_attack = has_burst
       end
 
       def play

@@ -3,13 +3,15 @@ module MonsterBox
     module Builders
       class Base
         GUARD_TEXT = 'GUARD'
-        DYING_WISH = 'DYING WISH'
+        DYING_WISH_TEXT = 'DYING WISH'
+        BURST_TEXT = 'BURST'
         DEFAULT_COST = 0
         DEFAULT_TEXT = ''
         DEFAULT_ATTACK = 0
         DEFAULT_HEALTH = 0
         DEFAULT_HAS_GUARD = false
         DEFAULT_HAS_DYING_WISH = false
+        DEFAULT_HAS_BURST = false
 
         def initialize(name)
           @name = name
@@ -19,6 +21,7 @@ module MonsterBox
           @health = DEFAULT_HEALTH
           @has_guard = DEFAULT_HAS_GUARD
           @has_dying_wish = DEFAULT_HAS_DYING_WISH
+          @has_burst = DEFAULT_HAS_BURST
         end
 
         def superclass
@@ -55,6 +58,11 @@ module MonsterBox
           self
         end
 
+        def has_burst
+          @has_burst = true
+          self
+        end
+
         def build(&block)
           card_class = Class.new(superclass) do
             def initialize
@@ -64,7 +72,8 @@ module MonsterBox
                     self.class::ATTACK,
                     self.class::HEALTH,
                     self.class::HAS_GUARD,
-                    self.class::HAS_DYING_WISH)
+                    self.class::HAS_DYING_WISH,
+                    self.class::HAS_BURST)
             end
 
             class_eval &block if block
@@ -76,6 +85,7 @@ module MonsterBox
           card_class.const_set('HEALTH', @health)
           card_class.const_set('HAS_GUARD', @has_guard)
           card_class.const_set('HAS_DYING_WISH', @has_dying_wish)
+          card_class.const_set('HAS_BURST', @has_burst)
           card_class
         end
 
@@ -83,7 +93,10 @@ module MonsterBox
 
         def build_text
           if @has_dying_wish
-            @text = "#{DYING_WISH}: #{@text}"
+            @text = "#{DYING_WISH_TEXT}: #{@text}"
+          end
+          if @has_burst
+            @text = "#{BURST_TEXT}\n#{@text}"
           end
           if @has_guard
             @text = "#{GUARD_TEXT}\n#{@text}"
