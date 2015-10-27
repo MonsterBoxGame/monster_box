@@ -18,7 +18,7 @@ module MonsterBox
           @attack = DEFAULT_ATTACK
           @health = DEFAULT_HEALTH
           @has_guard = DEFAULT_HAS_GUARD
-          @has_guard = DEFAULT_HAS_DYING_WISH
+          @has_dying_wish = DEFAULT_HAS_DYING_WISH
         end
 
         def superclass
