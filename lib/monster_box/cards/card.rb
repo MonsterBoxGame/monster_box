@@ -9,7 +9,11 @@ module MonsterBox
         @text = text
       end
 
-      def play
+      def play(*args)
+        raise 'Not implemented'
+      end
+
+      def is_monster?
         raise 'Not implemented'
       end
     end

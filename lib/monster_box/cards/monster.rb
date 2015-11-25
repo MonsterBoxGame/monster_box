@@ -22,7 +22,7 @@ module MonsterBox
         @can_attack = has_burst
       end
 
-      def play
+      def play(*args)
         summon
       end
 
@@ -61,6 +61,10 @@ module MonsterBox
       end
 
       def died
+      end
+
+      def is_monster?
+        true
       end
     end
   end

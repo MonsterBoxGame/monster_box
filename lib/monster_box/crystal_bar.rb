@@ -31,6 +31,10 @@ module MonsterBox
       end
     end
 
+    def gain_extra_crystals(number)
+      @unspent += number
+    end
+
     def enough_crystals?(cost)
       cost <= @unspent
     end

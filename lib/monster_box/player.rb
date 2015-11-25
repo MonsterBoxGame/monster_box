@@ -33,7 +33,11 @@ module MonsterBox
       if can_play?(card)
         @crystal_bar.spend(card.cost)
         @hand.play_card(card)
-        @board.summon(card)
+        if card.is_monster?
+          @board.summon(card)
+        else
+          card.play(self)
+        end
       else
         raise MonsterBox::IllegalMove
       end
