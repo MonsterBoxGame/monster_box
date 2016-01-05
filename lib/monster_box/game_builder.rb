@@ -7,8 +7,8 @@ module MonsterBox
       second_player_cards = (1..30).map do
         MonsterBox::Cards::Zombies::NecroRaiser.new
       end
-      first_crystal_bar = CrystalBar.initial
-      second_crystal_bar = CrystalBar.initial
+      first_crystal_bar = CrystalBar.init_first
+      second_crystal_bar = CrystalBar.init_second
       first_player = Player.new(true,
                                 Deck.new(first_player_cards),
                                 first_crystal_bar)

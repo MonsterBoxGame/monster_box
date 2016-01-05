@@ -1,11 +1,16 @@
 module MonsterBox
   class CrystalBar
     MAX_CRYSTALS = 10
-    STARTING_CRYSTALS = 1
+    FIRST_STARTING_CRYSTALS = 1
+    SECOND_STARTING_CRYSTALS = 0
     TURN_GAIN = 1
 
-    def self.initial
-      CrystalBar.new(STARTING_CRYSTALS)
+    def self.init_first
+      CrystalBar.new(FIRST_STARTING_CRYSTALS)
+    end
+
+    def self.init_second
+      CrystalBar.new(SECOND_STARTING_CRYSTALS)
     end
 
     def spend(number)
