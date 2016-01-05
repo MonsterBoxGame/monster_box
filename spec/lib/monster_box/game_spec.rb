@@ -4,7 +4,7 @@ describe MonsterBox::Game do
   context '#pass_turn' do
     let(:first_player) { double(:first_player) }
     let(:second_player) { double(:second_player) }
-    let(:game) { MonsterBox::Game.new(first_player, second_player, nil) }
+    let(:game) { MonsterBox::Game.new(first_player, second_player) }
 
     it 'first player passes turn' do
       first_player.should_receive(:pass_turn)

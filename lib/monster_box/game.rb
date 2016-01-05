@@ -2,11 +2,10 @@ module MonsterBox
   class Game
     attr_reader :first_player, :second_player
 
-    def initialize(first_player, second_player, board)
+    def initialize(first_player, second_player)
       @first_player = first_player
       @second_player = second_player
       @players = [first_player, second_player]
-      @board = board
       @state = :new
     end
 
