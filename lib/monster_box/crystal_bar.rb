@@ -18,11 +18,11 @@ module MonsterBox
     end
 
     def next_turn
-      gain_empty_crystals(TURN_GAIN)
+      gain_spent_crystals(TURN_GAIN)
       @unspent = @total
     end
 
-    def gain_empty_crystals(number)
+    def gain_spent_crystals(number)
       @total += number
       if @total > MAX_CRYSTALS
         @total = MAX_CRYSTALS
